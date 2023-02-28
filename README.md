@@ -95,19 +95,19 @@ Instructions
 ` ` - No prefix, the number is decimal.
 
 
-ld{x,y} = load a value into the x or y cpu registers.
+ld{x,y} - load a value into the x or y cpu registers.
   e.g. `ldx #5`
   load the constant (`#`) 5 into the x register.
 
-st{x,y} = store a value into system RAM.
+st{x,y} - store a value into system RAM.
   e.g. `stx $00`
   store the value in the x register into system RAM at address
   (`$` - prefix for hex numbers) 00.
 
-in{x,y} = increment the value at the x or y cpu registers.
+in{x,y} - increment the value at the x or y cpu registers.
 
-dec <address> = decrement the value at the given memory location.
-inc <address> = increment the value at the given memory location.
+dec - decrement the value at the given memory location.
+inc - increment the value at the given memory location.
 
 lda - load a value into the accumulator register.
 clc - clear the carry flag
