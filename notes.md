@@ -15,9 +15,44 @@ PPU - Picture Processing Unit
 ### CPU Registers
 The 6502 processor has three registers for general programming use.
 
-* x register
-* y register
-* a (accumulator) register
+* X register
+* Y register
+* A (accumulator) register
+
+Additional registers on the processor include:
+
+#### Program Counter
+The **program counter** is a 16-bit register that holds the next
+instruction for the program.
+
+```ascii
++------+------+
+|  LO  |  HI  |
+| byte | byte |
++------+------+
+```
+
+The range for the LO byte is `$00` - `$FF`.
+The range for the HI byte is `$08` - `$FF`.
+
+#### Processor Status
+The **processor status** register is an 8-bit register. Each bit is a flag.
+
+```ascii
++---+---+---+---+---+---+---+---+
+| N | V | - | - | D | I | Z | C |
++---+---+---+---+---+---+---+---+
+```
+
+**N** - Negative,
+**V** - 
+**D** - 
+**I** - 
+**Z** - Zero,
+**C** - Carry, set to true when a bit is carried during bitwise
+        arithmetic. Also used set to true when making comparisons
+        and the value in the A register is >= the value at the mem
+        location being compared.
 
 
 ### Memory Map
@@ -78,3 +113,9 @@ lda - load a value into the accumulator register.
 clc - clear the carry flag
 adc - add with carry; adds the accumulator to a given memory location
 sta - store value in the accumulator register in a given memory location
+
+cmp - compare what's in the A register to the given memory location.
+      If A >= the memory location, set the carry flag to true,
+      otherwise clear the carry flag.
+
+bcc - branch if carry clear; goto given label if carry flag is false.
