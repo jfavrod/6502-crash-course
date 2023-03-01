@@ -44,15 +44,24 @@ The **processor status** register is an 8-bit register. Each bit is a flag.
 +---+---+---+---+---+---+---+---+
 ```
 
-* **N** - Negative,
+* **N** - Negative
+          If the value of the x register is decremented from
+          zero, the new value will be $FF (255) and the negative flag
+          will be set to true.
+
 * **V** - 
 * **D** - 
 * **I** - 
-* **Z** - Zero,
+* **Z** - Zero, when and operation is performed, the zero flag will be
+          set if the value placed in the accumulator is zero.
+
+          If the comparison with the X register is equal, the zero flag
+          will be set.
+
 * **C** - Carry, set to true when a bit is carried during bitwise
-        arithmetic. Also used set to true when making comparisons
-        and the value in the A register is >= the value at the mem
-        location being compared.
+          arithmetic. Also used set to true when making comparisons and
+          the value in the A register is >= the value at the mem
+          location being compared.
 
 
 ### Memory Map
@@ -104,18 +113,39 @@ Instructions
   store the value in the x register into system RAM at address
   (`$` - prefix for hex numbers) 00.
 
+`de{x,y}` - decrement the value at the x or y cpu registers.
 `in{x,y}` - increment the value at the x or y cpu registers.
 
 `dec` - decrement the value at the given memory location.
 `inc` - increment the value at the given memory location.
 
 `lda` - load a value into the accumulator register.
-`clc` - clear the carry flag
-`adc` - add with carry; adds the accumulator to a given memory location
 `sta` - store value in the accumulator register in a given memory location
+
+`adc` - add with carry; adds the accumulator to a given memory location
+`sbc` - subtract with carry; subtracts the accumulator to a given
+        memory location
+
+`clc` - clear the carry flag
+`sec` - set the carry flag
 
 `cmp` - compare what's in the A register to the given memory location.
         If A >= the memory location, set the carry flag to true,
         otherwise clear the carry flag.
 
+`cmx` - compare what's in the X register to the given memory location.
+        If X >= the memory location, set the carry flag to true,
+        otherwise clear the carry flag.
+
 `bcc` - branch if carry clear; goto given label if carry flag is false.
+`bcq` - branch if equal; goto given label if zero flag is set.
+`bpl` - branch on positive result; goto the given label if the negative
+        flag is clear.
+`bne` - branch if not equal; goto the given label if the zero flag is
+        not set.
+
+`and` - bitwise and; compare the accumulator with the given value
+        stores the result in the accumulator
+        sets the zero flag if the result of the comparison is zero
+`ora` - bitwise or; compare the accumulator with the given value
+`eor` - bitwise xor; compare the accumulator with the given value
